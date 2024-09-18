@@ -28,6 +28,7 @@ class _SubmissionPageState extends State<SubmissionPage> {
       body: ListView(
         padding: EdgeInsets.symmetric(horizontal: 30, vertical: 10),
         children: [
+
           Column(children: [
             Image.asset(
               "asset/logo.png",

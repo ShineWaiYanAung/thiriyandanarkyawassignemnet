@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:thiriyandadrkyaw_adpd_assignment/SchoolPages/submisson_page.dart';
 
+import 'Authenticatoin/login.dart';
 import 'SchoolPages/home_page.dart';
 
 void main() {
@@ -20,7 +21,7 @@ class MyApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
         useMaterial3: true,
       ),
-      home : HomePage()
+      home : LoginPage()
     );
   }
 }

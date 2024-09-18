@@ -66,6 +66,8 @@ flutter:
     - asset/person/lecturer.png
     - asset/Lecture/networking.jpg
     - asset/Lecture/programming.jpg
+    - asset/facebook.png
+    - asset/goole.png
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/to/resolution-aware-images
 
