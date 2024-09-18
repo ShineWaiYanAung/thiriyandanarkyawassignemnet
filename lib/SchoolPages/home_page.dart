@@ -1,4 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:thiriyandadrkyaw_adpd_assignment/Authenticatoin/login.dart';
+import 'package:thiriyandadrkyaw_adpd_assignment/SchoolPages/lecture_detail.dart';
+import 'package:thiriyandadrkyaw_adpd_assignment/SchoolPages/profile.dart';
 import 'package:thiriyandadrkyaw_adpd_assignment/SchoolPages/submisson_page.dart';
 
 class HomePage extends StatefulWidget {
@@ -18,7 +21,8 @@ class _HomePageState extends State<HomePage> {
           margin: EdgeInsets.only(top: 20),
           decoration: BoxDecoration(
               color: Colors.white,
-              borderRadius: BorderRadius.only(topRight: Radius.circular(50),topLeft: Radius.circular(50)),
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(50), topLeft: Radius.circular(50)),
               boxShadow: const [
                 BoxShadow(color: Colors.white10, spreadRadius: 1, blurRadius: 1)
               ]),
@@ -37,7 +41,11 @@ class _HomePageState extends State<HomePage> {
                   ),
                   IconButton(
                     onPressed: () {
-                      ///Navigator
+                      Navigator.of(context).push(
+                        MaterialPageRoute(
+                          builder: (context) => Profile(),
+                        ),
+                      );
                     },
                     icon: Icon(
                       Icons.person,
@@ -198,7 +206,9 @@ class _HomePageState extends State<HomePage> {
                   ],
                 ),
               ),
-              SizedBox(height: 25,),
+              SizedBox(
+                height: 25,
+              ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: [
@@ -213,7 +223,9 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Image.asset("asset/Lecture/networking.jpg",
                             height: 120, width: 160),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Row(
                           children: [
                             Text(
@@ -223,12 +235,22 @@ class _HomePageState extends State<HomePage> {
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(width: 10,),
-
+                            SizedBox(
+                              width: 10,
+                            ),
                             InkWell(
-                              onTap: ()=>{
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SubmissionPage(title: "Networking"),))
-
+                              onTap: () => {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => LectureDetail(
+                                    title: "Networking",
+                                    instructorTitle: 'Networking Admistor',
+                                    instructor: 'Poarch Bella',
+                                    lecture1: 'Networking Day One',
+                                    lecture2: 'Networking Day Two',
+                                    lecture3: 'Netoworking Day Three',
+                                    lecture4: 'Submit Assignment',
+                                  ),
+                                ))
                               },
                               child: Container(
                                 padding: EdgeInsets.all(3),
@@ -251,6 +273,7 @@ class _HomePageState extends State<HomePage> {
                       ],
                     ),
                   ),
+
                   ///Programming Course
                   Container(
                     padding: EdgeInsets.symmetric(horizontal: 5, vertical: 10),
@@ -262,7 +285,9 @@ class _HomePageState extends State<HomePage> {
                       children: [
                         Image.asset("asset/Lecture/programming.jpg",
                             height: 120, width: 160),
-                        SizedBox(height: 10,),
+                        SizedBox(
+                          height: 10,
+                        ),
                         Row(
                           children: [
                             Text(
@@ -272,12 +297,22 @@ class _HomePageState extends State<HomePage> {
                                   fontSize: 12,
                                   fontWeight: FontWeight.bold),
                             ),
-                            SizedBox(width: 10,),
-
+                            SizedBox(
+                              width: 10,
+                            ),
                             InkWell(
-                              onTap: ()=>{
-                                Navigator.of(context).push(MaterialPageRoute(builder: (context) => SubmissionPage(title: "Programming"),))
-
+                              onTap: () => {
+                                Navigator.of(context).push(MaterialPageRoute(
+                                  builder: (context) => LectureDetail(
+                                    title: "Programming",
+                                    instructorTitle: 'Programming Admistor',
+                                    instructor: 'Bella Porach',
+                                    lecture1: 'Programming Day One',
+                                    lecture2: 'Programming Day Two',
+                                    lecture3: 'Programming Day Three',
+                                    lecture4: 'Submit Assignment',
+                                  ),
+                                ))
                               },
                               child: Container(
                                 padding: EdgeInsets.all(3),

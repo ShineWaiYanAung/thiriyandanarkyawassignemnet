@@ -46,6 +46,16 @@ dev_dependencies:
   # package. See that file for information about deactivating specific lint
   # rules and activating additional ones.
   flutter_lints: ^4.0.0
+  hive_generator:
+  hive: ^2.2.3
+  hive_flutter: ^1.1.0
+  flutter_launcher_icons: ^0.13.1
+  build_runner: ^2.4.6
+
+flutter_launcher_icons:
+  android: true
+  image_path: "asset/logo.png"  # Change this to the path of your icon image
+
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec

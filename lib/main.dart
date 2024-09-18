@@ -1,11 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:thiriyandadrkyaw_adpd_assignment/SchoolPages/submisson_page.dart';
-
+import 'package:hive_flutter/adapters.dart';
 import 'Authenticatoin/login.dart';
-import 'SchoolPages/home_page.dart';
+import 'HIVEDatabase/Model/useraccount_model.dart';
+import 'HIVEDatabase/account_regiersterion.dart';
 
-void main() {
+Future<void>main() async{
+  WidgetsFlutterBinding.ensureInitialized();
+  await Hive.initFlutter();
+  Hive.registerAdapter(UserAccountModelAdapter());
+  Hive.registerAdapter(AccountRegiersterionAdapter());
+  await Hive.openBox<AccountRegiersterion>('userAccount');
   runApp(const MyApp());
+
 }
 
 class MyApp extends StatelessWidget {

@@ -1,4 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:thiriyandadrkyaw_adpd_assignment/Authenticatoin/login.dart';
+import 'package:thiriyandadrkyaw_adpd_assignment/HIVEDatabase/Model/function_CRUD.dart';
+import 'package:thiriyandadrkyaw_adpd_assignment/SchoolPages/home_page.dart';
+
+import '../HIVEDatabase/Model/useraccount_model.dart';
 
 class SignUpPage extends StatefulWidget {
   @override
@@ -6,6 +11,9 @@ class SignUpPage extends StatefulWidget {
 }
 
 class _SignUpPageState extends State<SignUpPage> {
+  final  TextEditingController userNameController = TextEditingController();
+  final  TextEditingController passwordController = TextEditingController();
+  final  TextEditingController emailController    = TextEditingController();
   bool _passwordVisibility = true;
 
   void _togglePasswordVisibility() {
@@ -16,6 +24,7 @@ class _SignUpPageState extends State<SignUpPage> {
 
   @override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: ListView(
         padding: EdgeInsets.all(16.0),
@@ -42,6 +51,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
             ),
             child: TextField(
+              controller: userNameController,
               decoration: InputDecoration(
                 icon: Icon(Icons.person, size: 40),
                 iconColor: Colors.blueAccent,
@@ -67,6 +77,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
             ),
             child: TextField(
+              controller: emailController,
               decoration: InputDecoration(
                 icon: Icon(Icons.email, size: 40),
                 iconColor: Colors.blueAccent,
@@ -92,6 +103,7 @@ class _SignUpPageState extends State<SignUpPage> {
               ],
             ),
             child: TextField(
+              controller: passwordController,
               obscureText: _passwordVisibility,
               decoration: InputDecoration(
                 suffixIcon: IconButton(
@@ -104,7 +116,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 icon: Icon(Icons.lock, size: 40),
                 iconColor: Colors.blueAccent,
                 hintText: 'Password',
-                contentPadding: EdgeInsets.symmetric(vertical: 16.0),
+                contentPadding: EdgeInsets.symmetric(horizontal: 16,vertical: 16.0),
                 border: InputBorder.none,
               ),
             ),
@@ -113,7 +125,8 @@ class _SignUpPageState extends State<SignUpPage> {
 
           ElevatedButton(
             onPressed: () {
-              // Handle sign up
+              userAccountRegiestor();
+              Navigator.of(context).push(MaterialPageRoute(builder: (context) => HomePage(),),);
             },
             child: Text('Sign Up', style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold, fontSize: 20)),
             style: ElevatedButton.styleFrom(
@@ -125,9 +138,14 @@ class _SignUpPageState extends State<SignUpPage> {
           Row(
             mainAxisAlignment: MainAxisAlignment.center,
             children: [
-              Text(
-                '------------- or login Up with -------------',
-                style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+              TextButton(
+                onPressed: (){
+                  Navigator.of(context).push(MaterialPageRoute(builder: (context) => LoginPage(),),);
+                },
+                child: Text(
+                  '------------- or login with -------------',
+                  style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+                ),
               ),
             ],
           ),
@@ -181,7 +199,7 @@ class _SignUpPageState extends State<SignUpPage> {
                 ),
                 child: InkWell(
                   onTap: () {
-                    // Handle Facebook sign up
+
                   },
                   child: Row(
                     mainAxisAlignment: MainAxisAlignment.center,
@@ -198,5 +216,36 @@ class _SignUpPageState extends State<SignUpPage> {
         ],
       ),
     );
+  }
+  void userAccountRegiestor (){
+    List <UserAccountModel> userAccounts =[];
+    final String userName = userNameController.text;
+    final String email   = emailController.text;
+    final String password = passwordController.text;
+
+
+    if(userName.isNotEmpty && email.isNotEmpty&& password.isNotEmpty ){
+      final userAccount = UserAccountModel(
+        userName :userName,
+        email : email,
+        password: password,
+      );
+      setState(() {
+        userAccounts = [userAccount];
+      });
+
+
+      CrudFunction.addAccountRegiseristion( userAccounts);
+      CrudFunction.handleErrorState(context, "Created Successfully Welcome ${userAccount.userName}",
+          true);
+      userNameController.clear();
+      emailController.clear();
+      passwordController.clear();
+    }
+    else{
+      CrudFunction.handleErrorState(context, "Pleas Fill in all field Correctly",
+          false);
+    }
+
   }
 }

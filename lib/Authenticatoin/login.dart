@@ -1,5 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:thiriyandadrkyaw_adpd_assignment/Authenticatoin/singup.dart';
+import 'package:thiriyandadrkyaw_adpd_assignment/HIVEDatabase/Model/function_CRUD.dart';
+import 'package:thiriyandadrkyaw_adpd_assignment/SchoolPages/home_page.dart';
+
+import '../HIVEDatabase/boxes.dart';
 
 class LoginPage extends StatefulWidget {
   @override
@@ -7,9 +11,50 @@ class LoginPage extends StatefulWidget {
 }
 
 class _LoginPageState extends State<LoginPage> {
+final  TextEditingController userNameController = TextEditingController();
+final  TextEditingController passwordController = TextEditingController();
+final  TextEditingController emailController    = TextEditingController();
   bool visibility = true;
-  @override
+Future<void> _login() async {
+  final email = emailController.text;
+  final password = passwordController.text;
+
+  if (email.isEmpty || password.isEmpty) {
+    CrudFunction.handleErrorState(
+        context, "Please Fill the Necessary Requirement ", false);
+    return;
+  }
+
+  final box = Boxes.getAccountRegiersterion();
+  bool found = false;
+
+  for (var transaction in box.values) {
+    for (var account in transaction.userAccount) {
+      if (account.email == email && account.password == password) {
+        setState(() {
+          found = true;
+        });
+        break;
+      }
+    }
+    if (found) break;
+  }
+
+  if (found) {
+    Navigator.pushReplacement(
+        context,
+        MaterialPageRoute(
+            builder: (context) =>
+                HomePage())); // Replace with your actual route
+  } else {
+    CrudFunction.handleErrorState(
+        context, "Your Name or Password is InCorrect ", false);
+  }
+}
+
+@override
   Widget build(BuildContext context) {
+
     return Scaffold(
       body: ListView(
         padding: EdgeInsets.all(16.0),
@@ -33,6 +78,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             child: TextField(
+              controller: emailController,
               decoration: InputDecoration(
                 icon: Icon(Icons.person,size: 40,),
                 iconColor: Colors.blueAccent,
@@ -59,6 +105,7 @@ class _LoginPageState extends State<LoginPage> {
               ],
             ),
             child: TextField(
+              controller: passwordController,
               obscureText: visibility,
               decoration: InputDecoration(
                 suffixIcon: IconButton(onPressed: (){
@@ -77,7 +124,7 @@ class _LoginPageState extends State<LoginPage> {
           SizedBox(height: 32.0),
           ElevatedButton(
             onPressed: () {
-              // Handle login
+              _login();
             },
             child: Text('Login',style: TextStyle(color: Colors.white,fontWeight: FontWeight.bold,fontSize: 20),),
             style: ElevatedButton.styleFrom(
@@ -163,4 +210,5 @@ class _LoginPageState extends State<LoginPage> {
       ),
     );
   }
+
 }
